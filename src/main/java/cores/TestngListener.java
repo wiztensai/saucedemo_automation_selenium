@@ -12,21 +12,22 @@ public class TestngListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        System.out.println("Starting test");
-        var threadId = Thread.currentThread().getId();
-        System.out.println("Thread Id: "+threadId);
+        int priority = result.getMethod().getPriority();
+        System.out.println("Starting test "+priority);
+//        var threadId = Thread.currentThread().getId();
+//        System.out.println("Thread Id: "+threadId);
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        String methodName = result.getMethod().getMethodName();
-        System.out.println("Test success: "+methodName);
+        String description = result.getMethod().getDescription();
+        System.out.println("Test success: "+description);
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        String methodName = result.getMethod().getMethodName();
-        System.out.println("Test failed: "+methodName);
+        String description = result.getMethod().getDescription();
+        System.out.println("Test failed: "+description);
     }
 
     @Override

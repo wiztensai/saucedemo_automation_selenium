@@ -2,13 +2,7 @@ package tests;
 
 import cores.base.BaseTestMultidriver;
 import cores.driver.AppDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.*;
 
@@ -18,8 +12,8 @@ public class TestCases extends BaseTestMultidriver{
     private String password="";
     private String hargaBarangSauceLab="";
 
-    @Test(priority = 1)
-    public void bukaWebsite() {
+    @Test(priority = 1, description = "Buka website https://www.saucedemo.com")
+    public void openWebsite() {
         var driver = AppDriver.getDriver();
         // Buka URL
         driver.get("https://www.saucedemo.com/");
@@ -27,8 +21,8 @@ public class TestCases extends BaseTestMultidriver{
         Assert.assertEquals(driver.getTitle(), "Swag Labs");
     }
 
-    @Test(priority = 2)
-    public void simpanUsernameAndPassword() {
+    @Test(priority = 2, description = "Simpan username dan password kedalam variabel")
+    public void saveLoginData() {
         LoginPage loginPage = new LoginPage();
         username = loginPage.getUsername();
         password = loginPage.getPassword();
@@ -38,8 +32,8 @@ public class TestCases extends BaseTestMultidriver{
         Assert.assertNotEquals(password, "");
     }
 
-    @Test(priority = 3)
-    public void loginMenggunakanVariabelYangDisimpan() {
+    @Test(priority = 3, description = "Login menggunakan variabel yang disimpan")
+    public void login() {
         LoginPage loginPage = new LoginPage();
 
         // Masukkan username dan password
@@ -54,8 +48,8 @@ public class TestCases extends BaseTestMultidriver{
         Assert.assertEquals(productPage.getPageTitle(), "Products");
     }
 
-    @Test(priority = 4)
-    public void getHargaProduk() {
+    @Test(priority = 4, description = "Menyimpan harga barang Sauce Labs Backpack kedalam variabel")
+    public void getProductPrice() {
         ProductPage productPage = new ProductPage();
         // Temukan harga produk (Sauce Labs Backpack)
         hargaBarangSauceLab = productPage.getPriceText();
@@ -64,8 +58,8 @@ public class TestCases extends BaseTestMultidriver{
         Assert.assertNotEquals(hargaBarangSauceLab, "");
     }
 
-    @Test(priority = 5)
-    public void verifikasiHargaDiHalCheckout() {
+    @Test(priority = 5, description = "Verifikasi harga di hlm checkout")
+    public void verifyPriceInCheckout() {
         ProductPage productPage = new ProductPage();
 
         // Klik produk (Sauce Labs Backpack)
@@ -83,8 +77,8 @@ public class TestCases extends BaseTestMultidriver{
         Assert.assertEquals(checkoutPage.getPriceText(), hargaBarangSauceLab);
     }
 
-    @Test(priority = 6)
-    public void checkout() {
+    @Test(priority = 6, description = "Melanjutkan proses checkout sampai selesai")
+    public void finishingCheckout() {
         CheckoutPage checkoutPage = new CheckoutPage();
 
         // Klik tombol Checkout
